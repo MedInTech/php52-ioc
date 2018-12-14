@@ -34,7 +34,7 @@ class MedInTech_IoC_Basic implements MedInTech_IoC_Interface
     return $subj;
   }
   public function set($key, $service) { $this->map[$key] = $service; }
-  public function unset($key) { unset($this->map[$key]); }
+  public function remove($key) { unset($this->map[$key]); }
   public function has($key, array $overrides = array())
   {
     return array_key_exists($key, $overrides) ||
@@ -67,7 +67,7 @@ class MedInTech_IoC_Basic implements MedInTech_IoC_Interface
   public function offsetExists($offset) { return $this->has($offset); }
   public function offsetGet($offset) { return $this->get($offset); }
   public function offsetSet($offset, $value) { $this->set($offset, $value); }
-  public function offsetUnset($offset) { $this->unset($offset); }
+  public function offsetUnset($offset) { $this->remove($offset); }
 
   protected function getArguments(ReflectionMethod $method, array $overrides = array())
   {
