@@ -2,7 +2,6 @@
   "name": "arth/php52-ioc",
   "description": "php5.2 Inverse of Control container implementation",
   "license": "proprietary",
-  "keywords":  ["MedInTech_Snake_Loader"],
   "authors": [
     {
       "name": "Alexander Deider",
@@ -19,5 +18,13 @@
     "phpunit/phpunit": "^7.5"
   },
   "require": {
+    "arth/php52-autoload": "*"
+  },
+  "extra": {
+    "autoload": {
+      "class": "MedInTech_Autoload_Snake",
+      "path": "/src",
+      "prefix": "MedInTech_IoC"
+    }
   }
 }
