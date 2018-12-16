@@ -64,6 +64,12 @@ class IoCTest extends TestCase
     $this->assertEquals('2018-09-01T00:30:00+0000', $dth->getDate()->format(DateTime::ISO8601));
   }
 
+  public function testCall()
+  {
+    $dt = new DateTime('1987-03-14');
+    $this->assertEquals('19870314', $this->IoC->call($dt, 'format', array('Ymd')));
+  }
+
   public function testCirculars()
   {
     try {

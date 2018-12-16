@@ -2,8 +2,8 @@
 
 class MedInTech_IoC_Basic implements MedInTech_IoC_Interface
 {
-  public $forceCircularsAsNull = false;
-  public $allowClassNameFactory = true;
+  public    $forceCircularsAsNull  = false;
+  public    $allowClassNameFactory = true;
   protected $circular_marker;
   protected $optional_marker;
   public function __construct()
@@ -61,7 +61,15 @@ class MedInTech_IoC_Basic implements MedInTech_IoC_Interface
 
     return $args ? $class->newInstanceArgs($args) : $class->newInstance();
   }
-  public function call($object, $method = '__invoke', array $overrides = array()) {/**/ }
+  public function call($object, $methodName = '__invoke', array $overrides = array())
+  {
+    $className = get_class($object);
+    $class = new ReflectionClass($className);
+    $method = $class->getMethod($methodName);
+    $args = $this->getArguments($method, $overrides);
+
+    return call_user_func_array(array($object, $methodName), $args);
+  }
 
   // ArrayAccess
   public function offsetExists($offset) { return $this->has($offset); }
